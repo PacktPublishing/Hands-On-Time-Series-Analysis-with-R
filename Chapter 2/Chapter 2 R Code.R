@@ -1,3 +1,5 @@
+# Chapter 2 Code
+
 # -------- Code Chank 1 --------
 # The Sys.Date function get the current date from the system 
 date <- Sys.Date() 
