@@ -126,8 +126,47 @@ ggplot(USgas_df, aes(x = USgas)) +
   geom_density(aes(fill = month)) + 
   ggtitle("USgas - Kernel Density Estimates by Month") +
   facet_grid(rows = vars(as.factor(month)))
-# -------- Code Chank 10 --------
-# -------- Code Chank 10 --------
-# -------- Code Chank 10 --------
-# -------- Code Chank 10 --------
-# -------- Code Chank 10 --------
+# -------- Code Chank 15 --------
+USgas_df$USgas_detrend <- USgas_df$USgas - decompose(USgas)$trend
+
+ggplot(USgas_df, aes(x = USgas_detrend)) + 
+  geom_density(aes(fill = month)) + 
+  ggtitle("USgas - Kernel Density Estimates by Month") +
+  facet_grid(rows = vars(as.factor(month)))
+# -------- Code Chank 16 --------
+# Density plot - 24 hour frequency
+UKgrid_df$hour <- as.factor(UKgrid_df$hour)
+ggplot(UKgrid_df, aes(x = UKgrid)) + 
+  geom_density(aes(fill = hour)) + 
+  ggtitle("UKgrid - Kernel Density Estimates by Hour of the day") +
+  facet_grid(rows = vars(as.factor(hour)))
+# -------- Code Chank 17 --------
+UKgrid_df$weekday <- as.factor(UKgrid_df$weekday)
+
+UKgrid_df %>% dplyr::filter(hour == 0) %>%
+  ggplot(aes(x = UKgrid)) + 
+  geom_density(aes(fill = as.factor(weekday))) + 
+  ggtitle("UKgrid - Kernel Density Estimates by Hour of the day") +
+  facet_grid(rows = vars(as.factor(weekday)))
+# -------- Code Chank 18 --------
+library(forecast)
+
+ggseasonplot(USgas, year.labels=TRUE, continuous=TRUE)
+# -------- Code Chank 19 --------
+ggseasonplot(USgas,  polar = TRUE)
+# -------- Code Chank 20 --------
+ts_seasonal(USgas, type = "normal")
+# -------- Code Chank 21 --------
+ts_seasonal(USgas, type = "cycle")
+# -------- Code Chank 22 --------
+ts_seasonal(USgas, type = "box")
+# -------- Code Chank 23 --------
+ts_seasonal(USgas, type = "all")
+# -------- Code Chank 24 --------
+ts_heatmap(USgas, color = "Reds")
+# -------- Code Chank 25 --------
+ts_quantile(UKgrid)
+# -------- Code Chank 26 --------
+ts_quantile(UKgrid, period = "weekdays", n = 2)
+# -------- Code Chank 27 --------
+ts_quantile(UKgrid, period = "monthly", n = 2)
