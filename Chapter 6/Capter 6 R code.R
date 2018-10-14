@@ -20,8 +20,28 @@ UKgrid <- extract_grid(type = "xts",
 
 ts_info(UKgrid)
 
-# -------- Code Chank 1 --------
+# -------- Code Chank 4 --------
+ts_plot(UKgrid, 
+        title = "National Hourly Demand UK Grid", 
+        Ytitle = "Megawatts",
+        Xgrid = TRUE,
+        Ygrid = TRUE) 
 
 
+# -------- Code Chank 5 --------
+# Transforming the ts object to data.frame object
+USgas_df <- data.frame(year = floor(time(USgas)),  
+                       month = cycle(USgas), 
+                       USgas = as.numeric(USgas))
 
-# -------- Code Chank 1 --------
+# Setting the month abbreviation and transfroming it to a factor
+USgas_df$month <- factor(month.abb[USgas_df$month], levels = month.abb)
+
+head(USgas_df)
+# -------- Code Chank 6 --------
+
+# -------- Code Chank 7 --------
+
+# -------- Code Chank 8 --------
+
+# -------- Code Chank 9 --------
