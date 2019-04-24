@@ -188,3 +188,8 @@ test_forecast(actual = UK_ts,
               forecast.obj = fc_tslm3,
               test = test_ts)
 accuracy(fc_tslm3, test_ts) 
+
+
+
+
+
