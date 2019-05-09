@@ -1,4 +1,4 @@
-# Chapter 13 Code
+# Chapter 12 Code
 
 # -------- Code Chank 1 --------
 library(TSstudio)
