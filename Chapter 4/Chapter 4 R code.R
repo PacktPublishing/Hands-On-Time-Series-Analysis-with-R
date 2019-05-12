@@ -45,7 +45,7 @@ head(as.Date.ts(USgas))
 data(US_indicators)
 
 str(US_indicators)
-# -------- Code Chank 9 --------
+# -------- Code Chank 14 --------
 Vehicle_Sales1 <- zoo(x = US_indicators$`Vehicle Sales`,
                       frequency = 12)
 
@@ -54,180 +54,199 @@ class(Vehicle_Sales1 )
 frequency(Vehicle_Sales1)
 
 head(Vehicle_Sales1)
-# -------- Code Chank 10 --------
-# Setting the date variable of the data frame as the series index
-zoo_obj <- zoo(x = US_indicators$`Vehicle Sales`, 
-               order.by = US_indicators$Date)
-
-class(zoo_obj)
-
-head(zoo_obj)
-
-head(index(zoo_obj))
-# -------- Code Chank 11 --------
-# Setting both the order.by and frequency arguments 
-zoo_obj <- zoo(x = US_indicators$`Vehicle Sales`, 
-               order.by = US_indicators$Date,
-               frequency = 12)
-
-class(zoo_obj)
-
-# Checking if the series is regular and strict
-is.regular(zoo_obj, strict = FALSE)
-
-is.regular(zoo_obj, strict = TRUE)
-# -------- Code Chank 12 --------
-# Creating a multiple time series object
-zoo_mts_obj <- zoo(x = US_indicators[,2:3],  
-                   order.by = as.yearmon(US_indicators$Date),
-                   frequency = 12)
-
-class(zoo_mts_obj)
-
-head(zoo_mts_obj)
-# -------- Code Chank 13 --------
-plot.zoo(zoo_mts_obj,
-         main = "Monthly Vehicle Sales and Unemployment Rate in the US ")
-# -------- Code Chank 14 --------
-# Converting a ts object ot a zoo object
-# Loading the USVSales dataset form the TSstudio
-data("USVSales", package = "TSstudio")
-
-class(USVSales)
-
-# Converting the dataset to a zoo object 
-USVSales_zoo <- as.zoo(USVSales, frequency = frequency(USVSales))
-
-class(USVSales_zoo)
-
-head(USVSales)
-
-head(USVSales_zoo)
-
-# Checking if the zoo object is a regular time series
-is.regular(USVSales_zoo, strict = FALSE)
-
-# Checking if the zoo object is a strict regular time series
-is.regular(USVSales_zoo, strict = TRUE)
 # -------- Code Chank 15 --------
-# Loading the xts package
-library(xts)
+Vehicle_Sales2 <- zoo(x = US_indicators$`Vehicle Sales`,
+                      order.by = US_indicators$Date,
+                      frequency = 12)
 
-# Loading the dataset from the TSstudio package
-data("Michigan_CS", package = "TSstudio")
+head(Vehicle_Sales2)
+
+class(index(Vehicle_Sales2))
+# -------- Code Chank 16 --------
+data(USgas)
+
+USgas_zoo <- as.zoo(USgas)
+# -------- Code Chank 17 --------
+ts_info(USgas)
+ts_info(USgas_zoo)
+# -------- Code Chank 18 --------
+is.regular(EURO_Brent, strict = TRUE)
+
+is.regular(Vehicle_Sales1, strict = TRUE)
+
+is.regular(Vehicle_Sales2, strict = TRUE)
+
+is.regular(USgas_zoo, strict = TRUE)
+
+# -------- Code Chank 19 --------
+is.regular(EURO_Brent, strict = FALSE)
+is.regular(Vehicle_Sales2, strict = FALSE)
+# -------- Code Chank 20 --------
+US_indicators_zoo <- zoo(x = US_indicators[,c("Vehicle Sales", "Unemployment Rate")], 
+                         frequency = 12,
+                         order.by = US_indicators$Date)
+# -------- Code Chank 21 --------
+ts_info(US_indicators_zoo)
+head(US_indicators_zoo)
+# -------- Code Chank 22 --------
+is.regular(US_indicators_zoo, strict = FALSE)
+# -------- Code Chank 23 --------
+data(Michigan_CS)
+
+ts_info(Michigan_CS)
 
 class(Michigan_CS)
+# -------- Code Chank 24 --------
+class(index(Michigan_CS))
+
+frequency(Michigan_CS)
+
+is.regular(Michigan_CS, strict = TRUE)
+# -------- Code Chank 24 --------
+head(Michigan_CS)
+# -------- Code Chank 25 --------
+library(xts)
+
+US_indicators_xts <- xts(x = US_indicators[,c("Vehicle Sales", "Unemployment Rate")], 
+                         frequency = 12,
+                         order.by = US_indicators$Date)
+
+head(US_indicators_xts)
+# -------- Code Chank 25 --------
+periodicity(Michigan_CS)
+# -------- Code Chank 26 --------
+indexClass(Michigan_CS)
+# -------- Code Chank 27 --------
+Michigan_CS <-  convertIndex(Michigan_CS, "Date")
+
+indexClass(Michigan_CS)
+# -------- Code Chank 28 --------
+head(.indexmon(Michigan_CS), 12)
+# -------- Code Chank 29 --------
+indexFormat(Michigan_CS) <- "%m-%d-%Y"
 
 head(Michigan_CS)
-# -------- Code Chank 16 --------
-plot.xts(xts_mts_obj,
-         multi.panel = 2, # Use separate the plots, as the two series have different scale 
-         yaxis.same = FALSE, # For the same reason, adjust the yaxis to the scale of each series
-         grid.ticks.on = "years",  # Setting the grid ticks period to draw
-         main = "Monthly Vehicle Sales and Unemployment Rate in the US ")
-# -------- Code Chank 17 --------
-start(xts_mts_obj)
+# -------- Code Chank 30 --------
+Vehicle_Sales_xts1 <- US_indicators_xts$`Vehicle Sales`[1:12]
 
-end(xts_mts_obj)
-
-frequency(xts_mts_obj)
-# -------- Code Chank 18 --------
-# Getting the series frequency/time interval and the starting and ending dates
-periodicity(xts_mts_obj)
-# -------- Code Chank 19 --------
-# Working with the xts index
-head(index(xts_mts_obj))
-
-indexClass(xts_mts_obj)
-
-# Modifing the series index from yearmon to Date
-xts_mts_obj <- convertIndex(xts_mts_obj, "Date")
-
-indexClass(xts_mts_obj)
-
-head(xts_mts_obj)
-# -------- Code Chank 20 --------
-# Extracting the first 12 months of the vehicle sales dataset
-class(xts_mts_obj)
-
-names(xts_mts_obj)
-
-# Extracting the first 12 months of the vehicle sales dataset
-# using the column name and the row index
-vehical_first_12m <- xts_mts_obj$`Vehicle Sales`[1:12]
-
-vehical_first_12m
-# -------- Code Chank 21 --------
-# Checking the new series attributes
-class(vehical_first_12m)
-
-periodicity(vehical_first_12m)
-
-is.regular(vehical_first_12m)
-# -------- Code Chank 22 --------
-# Extracing the first 12 months of the unemployment rate
-# and assign it as a new variable in the xts object
-vehical_first_12m$Unemployment.Rate <- xts_mts_obj[1:12, 2]
-
-vehical_first_12m
-
-class(vehical_first_12m)
-# -------- Code Chank 23 --------
-# Extracting all the observations during the year 1976
-US_indicators_xts1 <- xts_mts_obj["1976"]
-
-class(US_indicators_xts1)
-
-US_indicators_xts1
-# -------- Code Chank 24 --------
-# Extracting all the observations of the year 1976
-US_indicators_xts2 <- xts_mts_obj["1976-01/1976-12"]
-
-# A more concise method 
-US_indicators_xts3 <- xts_mts_obj["197601/12"]
-
-# Which eventually yield the same results:
-identical(US_indicators_xts1, US_indicators_xts2, US_indicators_xts3)
-# -------- Code Chank 25 --------
-data("USgas", package = "TSstudio")
-periodicity(USgas)
-class(USgas)
-
-periodicity(xts_mts_obj)
-class(xts_mts_obj)
-# -------- Code Chank 26 --------
-# Merging the xts_mts_obj and the USgas series
-# By default, the merge function applying an outer join
-US_ind <- merge(x = xts_mts_obj, USgas = USgas)
-class(US_ind)
-periodicity(US_ind)
-# -------- Code Chank 27 --------
-head(US_ind)
-# -------- Code Chank 28 --------
-# Applying inner join
-US_ind_inner <- merge(x = xts_mts_obj, USgas = USgas, join = "inner")
-class(US_ind_inner)
-periodicity(US_ind_inner)
-head(US_ind_inner)
-tail(US_ind_inner)
-# -------- Code Chank 29 --------
-plot.xts(US_ind_inner,
-         multi.panel = 3, # Use separate the plots, as the two series have different scale 
-         yaxis.same = FALSE, # For the same reason, adjust the yaxis to the scale of each series
-         grid.ticks.on = "years", # Setting the grid ticks period to draw 
-         main = "Monthly Vehicle Sales, Unemployment Rate and Natural Gas Consumption in the US ")
+ts_info(Vehicle_Sales_xts1)
 # -------- Code Chank 31 --------
-# Loading the US vehicle sales series
-data(USVSales, package = "TSstudio")
+Vehicle_Sales_xts2 <- US_indicators_xts$`Vehicle Sales`["1976"]
 
-# Applying a moving average of 3 months rolling window 
-USVSales_smooth <- rollapply(USVSales, FUN = mean, width = 3)
+ts_info(Vehicle_Sales_xts2)
+# -------- Code Chank 32 --------
+Vehicle_Sales_xts3 <- US_indicators_xts$`Vehicle Sales`["1976-01/06"]
+ts_info(Vehicle_Sales_xts3)
+# -------- Code Chank 33 --------
+indexClass(Michigan_CS)
+class(index(EURO_Brent))
+# -------- Code Chank 34 --------
+ts_info(Michigan_CS)
+ts_info(EURO_Brent)
+# -------- Code Chank 35 --------
+xts_merge_outer <- merge.xts(Michigan_CS = Michigan_CS, 
+                             EURO_Brent = EURO_Brent, 
+                             join = "outer" )
 
-# Merging the two series
-# To apply the xts merge method, we will convert the objects to xts
-USVSales_merged <- merge(Normal = as.xts(USVSales), Smooth = as.xts(USVSales_smooth), join = "inner")
+ts_info(xts_merge_outer)
+# -------- Code Chank 36 --------
+head(xts_merge_outer["1987"])
+# -------- Code Chank 37 --------
+xts_merge_inner <- merge.xts(Michigan_CS = Michigan_CS, 
+                             EURO_Brent = EURO_Brent, 
+                             join = "inner" )
 
-plot.xts(USVSales_merged, 
-         multi.panel = 2,
+ts_info(xts_merge_inner)
+# -------- Code Chank 38 --------
+head(xts_merge_inner)
+# -------- Code Chank 39 --------
+EURO_Brent_3ma <- rollapply(EURO_Brent, 
+                            width = 3,
+                            FUN = mean)
+# -------- Code Chank 40 --------
+ts_info(EURO_Brent_3ma)
+# -------- Code Chank 41 --------
+EURO_Brent_lag3 <-  lag(EURO_Brent, k = -3)
+
+EURO_Brent_merge <- merge.zoo(EURO_Brent, EURO_Brent_lag3)
+
+head(EURO_Brent_merge)
+# -------- Code Chank 42 --------
+USgas_zoo_qtr <-  aggregate(USgas_zoo, 
+                            by = as.yearqtr, 
+                            FUN = sum)
+# -------- Code Chank 43 --------
+ts_info(USgas_zoo)
+# -------- Code Chank 44 --------
+library(lubridate)
+
+USgas_zoo_yr <-  aggregate(USgas_zoo, 
+                           by = year, 
+                           FUN = sum)
+
+head(USgas_zoo_yr)
+# -------- Code Chank 45 --------
+plot.zoo(EURO_Brent, 
+         main = "Crude Oil Prices: Brent - Europe",
+         ylab = "USD per Barrel",
+         col = "blue")
+
+# -------- Code Chank 46 --------
+plot.zoo(US_indicators_zoo,
+         main = "Monthly Vehicle Sales and Unemployment Rate in the US",
+         ylab = c("Vehicle Sales (Thousands of Units)", "Unemployment Rate (%)"),
+         col = c("blue", "red"))
+# -------- Code Chank 47 --------
+plot.xts(Michigan_CS)
+# -------- Code Chank 48 --------
+plot.xts(Michigan_CS,
+         subset = "2010/",
+         main = "Univeristy of Michigan Consumer Sentiment Index",
+         col = "blue",
          grid.ticks.on = "years",
-         main = "The US Vehicale Sales Before and After Smoothing")
+         minor.ticks = "years")
+# -------- Code Chank 49 --------
+plot.xts(US_indicators_xts,
+         multi.panel = 2,
+         yaxis.same = FALSE, 
+         grid.ticks.on = "years",
+         minor.ticks = FALSE,
+         main = "Monthly Vehicle Sales and Unemployment Rate in the US")
+# -------- Code Chank 50 --------
+USgas_xts <- as.xts(USgas) 
+
+indexClass(USgas_xts)
+# -------- Code Chank 51 --------
+USgas_xts_ma <- rollapply(USgas_xts, 
+                          width = 12, 
+                          FUN = mean)
+# -------- Code Chank 52 --------
+USgas_merge <- merge.xts(USgas = USgas_xts, 
+                         USgas_Smooth = USgas_xts_ma)
+# -------- Code Chank 53 --------
+USgas_month_diff <- 100 * (USgas_xts / lag(USgas_xts, n = 1) - 1)
+USgas_yoy_diff <- 100 * (USgas_xts / lag(USgas_xts, n = 12) - 1)
+# -------- Code Chank 54 --------
+plot.xts(USgas_merge, 
+         main = "US Natural Gas Consumption Summary",
+         multi.panel = FALSE,
+         col = c("black", "blue"),
+         ylim = c(1400, 3700)) 
+# -------- Code Chank 55 --------
+lines(USgas_month_diff , 
+      col = "red", 
+      type = "h", 
+      on = NA, 
+      main = "Monthly Difference (%)")
+
+lines(USgas_yoy_diff , 
+      col = "purple", 
+      type = "h", 
+      on = NA, 
+      main = "YoY Growth (%)")
+# -------- Code Chank 56 --------
+addLegend("topleft", 
+          on=1, 
+          legend.names = c("Gas Consumption", "Moving Average", "Monthly Diff. (%)", "YoY Change (%)"), 
+          lty=c(1, 1), lwd=c(2, 1),
+          col=c("black", "blue", "red", "purple"))
