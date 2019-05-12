@@ -1,27 +1,22 @@
 # Chapter 4 Code
 
 # -------- Code Chank 1 --------
-# Loading the Brent Crude Oil Prices dataset
-data("EURO_Brent", package = "TSstudio")
+library(TSstudio)
 
-# Loading the zoo package
+data(EURO_Brent)
+
 library(zoo)
 
-# Lets check the first 10 observations of the series
-head(EURO_Brent, 10)
-
-# Plotting the series
-plot.zoo(EURO_Brent, 
-         main = "Brent Crude Oil Prices",
-         ylab = "USD per Barrel")
 # -------- Code Chank 2 --------
-class(EURO_Brent)
+ts_info(EURO_Brent)
 # -------- Code Chank 3 --------
-# Using the stats package functions to extract the series attributes
+class(EURO_Brent)
+# -------- Code Chank 4 --------
 frequency(EURO_Brent)
+head(cycle(EURO_Brent), 12)
+# -------- Code Chank 5 --------
 start(EURO_Brent)
 end(EURO_Brent)
-head(cycle(EURO_Brent), 12)
 head(time(EURO_Brent), 12)
 # -------- Code Chank 4 --------
 head(index(EURO_Brent), 12)
