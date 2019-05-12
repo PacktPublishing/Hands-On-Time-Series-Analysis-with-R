@@ -6,7 +6,6 @@ library(TSstudio)
 data(EURO_Brent)
 
 library(zoo)
-
 # -------- Code Chank 2 --------
 ts_info(EURO_Brent)
 # -------- Code Chank 3 --------
@@ -18,43 +17,43 @@ head(cycle(EURO_Brent), 12)
 start(EURO_Brent)
 end(EURO_Brent)
 head(time(EURO_Brent), 12)
-# -------- Code Chank 4 --------
-head(index(EURO_Brent), 12)
-# -------- Code Chank 5 --------
-class(index(EURO_Brent))
 # -------- Code Chank 6 --------
-# Creating a sequence of dates
-monthly_dates <- seq.Date(from = as.Date("2018-01-11"), length.out = 12, by = "month")
-
-class(monthly_dates)
-
-monthly_dates
-
-# Converting the dates vector to yearmon format
-yearmon_format <- as.yearmon(monthly_dates)
-
-class(yearmon_format)
-
-yearmon_format
-# -------- Code Chank 7 --------
-# Conveting the yearmon object back to Date object
-as.Date(yearmon_format)
+head(index(EURO_Brent))
+# -------- Code Chank 7--------
+class(index(EURO_Brent))
+attributes(index(EURO_Brent))
 # -------- Code Chank 8 --------
-# Loading the US_indicators dataset from the TSstudio package
-data("US_indicators", package = "TSstudio")
+index(EURO_Brent) <- as.Date(index(EURO_Brent))
+head(EURO_Brent)
+class(index(EURO_Brent))
+# -------- Code Chank 9 --------
+monthly_dates <- seq.Date(from = as.Date("2019-01-01"), length.out = 12, by = "month")
 
-class(US_indicators)
+head(monthly_dates)
+# -------- Code Chank 10 --------
+monthly_yearmon <- as.yearmon(monthly_dates)
+
+head(monthly_yearmon)
+# -------- Code Chank 11 --------
+data(USgas)
+
+head(time(USgas))
+# -------- Code Chank 12 --------
+head(as.Date.ts(USgas))
+
+# -------- Code Chank 13 --------
+data(US_indicators)
 
 str(US_indicators)
 # -------- Code Chank 9 --------
-# Assigning the Vehicale Sales variable from the US_indicators data frame
-zoo_obj <- zoo(x = US_indicators$`Vehicle Sales`)
+Vehicle_Sales1 <- zoo(x = US_indicators$`Vehicle Sales`,
+                      frequency = 12)
 
-class(zoo_obj)
+class(Vehicle_Sales1 )
 
-head(zoo_obj)
+frequency(Vehicle_Sales1)
 
-head(index(zoo_obj))
+head(Vehicle_Sales1)
 # -------- Code Chank 10 --------
 # Setting the date variable of the data frame as the series index
 zoo_obj <- zoo(x = US_indicators$`Vehicle Sales`, 
