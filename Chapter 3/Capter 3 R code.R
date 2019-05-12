@@ -19,11 +19,11 @@ is.ts(NGC) # Test if the object is a "ts" class
 length(NGC) # Get the number of observations
 
 # -------- Code Chank 4 --------
-NGC
+head(NGC, 32)
 
 # -------- Code Chank 5 --------
-cycle(NGC)
-time(NGC)
+head(cycle(NGC), 32)
+head(time(NGC), 32)
 
 # -------- Code Chank 6 --------
 frequency(NGC)
@@ -139,20 +139,23 @@ NGC_year <- aggregate(NGC, nfrequency = 1, FUN = "sum")
 
 # -------- Code Chank 25 --------
 NGC_year
-
 # -------- Code Chank 26 --------
+NGC_lag4 <- stats::lag(NGC, k = -4)
+
+ts_info(NGC_lag4)
+# -------- Code Chank 27 --------
 plot.ts(tvs_ts, 
         main = "US Monthly Total Vehicle Sales",
         ylab = "Thousands of Vehicle",
         xlab = "Time"
 )
 
-# -------- Code Chank 27 --------
+# -------- Code Chank 28 --------
 plot.ts(US_indicators_ts,
         plot.type = "multiple",
         main = "US Monthly Vehicle Sales vs. Unemployment Rate",
         xlab = "Time")
-# -------- Code Chank 28 --------
+# -------- Code Chank 29 --------
 library(dygraphs)  
 
 dygraph(tvs_ts, 
@@ -160,7 +163,7 @@ dygraph(tvs_ts,
         ylab = "Thousands of Vehicle") %>% 
   dyRangeSelector()
 
-# -------- Code Chank 29 --------
+# -------- Code Chank 30 --------
 dygraph(US_indicators_ts,
         main = "US Monthly Vehicle Sales vs. Unemployment Rate") %>%
   dyAxis("y", label = "Vehicle Sales") %>%
@@ -169,7 +172,7 @@ dygraph(US_indicators_ts,
   dySeries("Unemployment Rate", axis = 'y2', color = "red") %>%
   dyLegend(width = 400)
 
-# -------- Code Chank 30 --------
+# -------- Code Chank 31 --------
 library(TSstudio)
 
 ts_plot(tvs_ts,
@@ -177,7 +180,7 @@ ts_plot(tvs_ts,
         Ytitle = "Thousands of Vehicle",
         slider = TRUE
 )
-# -------- Code Chank 31 --------
+# -------- Code Chank 32 --------
 ts_plot(US_indicators_ts, 
         title = "US Monthly Vehicle Sales vs. Unemployment Rate",
         type = "multiple")
