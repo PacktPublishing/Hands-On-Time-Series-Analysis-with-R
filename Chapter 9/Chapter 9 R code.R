@@ -188,8 +188,29 @@ test_forecast(actual = UK_ts,
               forecast.obj = fc_tslm3,
               test = test_ts)
 accuracy(fc_tslm3, test_ts) 
+# -------- Code Chank 33 --------
+summary(md_tslm3)$coefficients %>% tail(1)
+# -------- Code Chank 34 --------
+anova(md_tslm3)
+# -------- Code Chank 35 --------
+final_md <- tslm(UK_ts ~ season + trend + wday + month + lag365, 
+                 data = UKdaily)
+# -------- Code Chank 36 --------
+checkresiduals(final_md)
+# -------- Code Chank 37 --------
+UK_fc_df <- data.frame(date = seq.Date(from = max(UKdaily$TIMESTAMP) + days(1), 
+                                       by = "day", 
+                                       length.out = h))
+# -------- Code Chank 38 --------
+UK_fc_df$wday <- factor(lubridate::wday(UK_fc_df$date, label = TRUE), ordered = FALSE)
 
+UK_fc_df$month <- factor(month(UK_fc_df$date, label = TRUE), ordered = FALSE)
 
-
-
-
+UK_fc_df$lag365 <- tail(UKdaily$ND, h)
+# -------- Code Chank 39 --------
+UKgrid_fc <- forecast(final_md, h = h, newdata = UK_fc_df)
+# -------- Code Chank 40 --------
+plot_forecast(UKgrid_fc,
+              title = "The UK National Demand for Electricity Forecast",
+              Ytitle = "MW",
+              Xtitle = "Year")
