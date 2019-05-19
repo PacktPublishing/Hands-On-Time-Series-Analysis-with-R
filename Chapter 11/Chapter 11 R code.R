@@ -257,4 +257,47 @@ USgas_auto_md2 <- auto.arima(train,
                              approximation = FALSE)
 USgas_auto_md2
 
+# -------- Code Chank 61 --------
+df <- ts_to_prophet(AirPassengers) %>% setNames(c("date", "y"))
 
+df$lag12 <- dplyr::lag(df$y, n = 12)
+
+library(lubridate)
+
+df$month <- factor(month(df$date, label = TRUE), ordered = FALSE)
+
+df$trend <- 1:nrow(df)
+# -------- Code Chank 62 --------
+par <- ts_split(ts.obj = AirPassengers, sample.out = 12)
+
+train <- par$train
+
+test <- par$test
+# -------- Code Chank 63 --------
+train_df <- df[1:(nrow(df) - 12), ]
+test_df <- df[(nrow(df) - 12 + 1):nrow(df), ]
+# -------- Code Chank 64 --------
+md1 <- tslm(train ~ season + trend + lag12, data = train_df)
+# -------- Code Chank 65 --------
+checkresiduals(md1)
+# -------- Code Chank 66 --------
+md2 <- auto.arima(train, 
+                  xreg = cbind(model.matrix(~ month,train_df)[,-1], 
+                               train_df$trend, 
+                               train_df$lag12), 
+                  seasonal = TRUE, 
+                  stepwise = FALSE, 
+                  approximation = FALSE)
+# -------- Code Chank 67 --------
+summary(md2)
+# -------- Code Chank 68 --------
+checkresiduals(md2)
+# -------- Code Chank 69 --------
+fc1 <- forecast(md1, newdata = test_df)
+
+fc2 <- forecast(md2, xreg = cbind(model.matrix(~ month,test_df)[,-1], 
+                                  test_df$trend, 
+                                  test_df$lag12))
+# -------- Code Chank 70 --------
+accuracy(fc1, test)
+accuracy(fc2, test)
