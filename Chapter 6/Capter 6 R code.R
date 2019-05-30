@@ -34,7 +34,7 @@ USgas_df <- data.frame(year = floor(time(USgas)),
                        month = cycle(USgas), 
                        USgas = as.numeric(USgas))
 
-# Setting the month abbreviation and transfroming it to a factor
+# Setting the month abbreviation and transforming it to a factor
 USgas_df$month <- factor(month.abb[USgas_df$month], levels = month.abb)
 
 head(USgas_df)
