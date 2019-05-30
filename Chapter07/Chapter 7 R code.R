@@ -33,6 +33,9 @@ ts_plot(USUnRate,
         title = "US Monthly Civilian Unemployment Rate",
         Ytitle = "Unemployment Rate (%)",
         Xtitle = "Year")
+
+us_vsales <- window(USVSales, start = c(1976,1), end = c(2018,6))
+us_unrate <- window(USUnRate, start = c(1976,1), end = c(2018,6))
 # -------- Code Chank 11 --------
 library(plotly)
 plot_ly(x = time(us_vsales), 
