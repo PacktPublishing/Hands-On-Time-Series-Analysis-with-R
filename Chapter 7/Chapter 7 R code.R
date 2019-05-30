@@ -42,7 +42,7 @@ plot_ly(x = time(us_vsales),
             name = "Unemployment Rate", 
             yaxis = "y2") %>%
   layout(
-    title = "Total Monthly Vehical Sales vs Unemployment Rate in the US", 
+    title = "Total Monthly Vehicle Sales vs Unemployment Rate in the US", 
     yaxis2 =  list(
       overlaying = "y",
       side = "right",
