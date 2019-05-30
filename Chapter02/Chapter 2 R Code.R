@@ -262,3 +262,4 @@ time_obj
 round_date(time_obj, unit = "minute") # Rounding by the minute 
 floor_date(time_obj, unit = "hour") # Rounding down by the hour
 ceiling_date(time_obj, unit = "day") # Rounding up by the day
+
