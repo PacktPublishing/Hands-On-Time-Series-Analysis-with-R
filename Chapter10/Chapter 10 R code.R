@@ -213,7 +213,7 @@ library(Quandl)
 
 gdp <- Quandl("FRED/GDP", start_date = "2010-01-01", type = "ts")
 
-gdp %>% ts_info()
+ts_info(gdp)
 # -------- Code Chank 20 --------
 ts_plot(gdp, 
         title = "Gross Domestic Product",
@@ -233,7 +233,11 @@ accuracy(fc_holt, test)
 # -------- Code Chank 24 --------
 test_forecast(gdp, forecast.obj = fc_holt, test = test)
 # -------- Code Chank 25 --------
-fc_holt_exp <- holt(train,  h = 8, beta = 0.75  ,initial = "optimal", exponential = TRUE) 
+fc_holt_exp <- holt(train,
+                    h = 8,
+                    beta = 0.75 ,
+                    initial = "optimal",
+                    exponential = TRUE) 
 
 fc_holt_exp$model
 # -------- Code Chank 26 --------
@@ -254,6 +258,10 @@ md_hw <- HoltWinters(train)
 
 md_hw
 # -------- Code Chank 31 --------
+fc_hw <- forecast(md_hw, h = 12)
+
+accuracy(fc_hw, test)
+
 test_forecast(actual = USgas, 
               forecast.obj = fc_hw, 
               test = test)
@@ -270,6 +278,8 @@ shallow_grid <-  ts_grid(train,
                          n.cores = 8)
 # -------- Code Chank 33 --------
 shallow_grid$grid_df[1:10,]
+
+plot_grid(shallow_grid)
 # -------- Code Chank 34 --------
 deep_grid <-  ts_grid(train, 
                       model = "HoltWinters",
@@ -293,10 +303,9 @@ md_hw_grid <- HoltWinters(train,
 
 fc_hw_grid <- forecast(md_hw_grid, h = 12)
 
+accuracy(fc_hw_grid, test)
 
 test_forecast(actual = USgas, 
               forecast.obj = fc_hw_grid, 
               test = test)
-
-accuracy(fc_hw_grid, test)
 
