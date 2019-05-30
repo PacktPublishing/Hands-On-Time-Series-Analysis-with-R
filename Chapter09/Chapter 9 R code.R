@@ -5,7 +5,10 @@ library(TSstudio)
 
 data("USgas")
 
-ts_plot(USgas)
+ts_plot(USgas,
+        title = "US Monthly Natural Gas consumption",
+        Ytitle = "Billion Cubic Feet",
+        Xtitle = "Year")
 # -------- Code Chank 2 --------
 ts_info(USgas)
 
@@ -135,15 +138,29 @@ md3 <- tslm(train.ts ~ season + trend + I(trend^2))
 
 summary(md3)
 # -------- Code Chank 25 --------
+r <- which(USgas_df$ds == as.Date("2014-01-01"))
+USgas_df$s_break <- ifelse(year(USgas_df$ds) >= 2010, 1, 0)
+USgas_df$s_break[r] <- 1
+md3 <- tslm(USgas ~ season + trend + I(trend^2) + s_break, data = USgas_df)
+summary(md3)
+
+
 library(UKgrid)
 
 UKdaily <- extract_grid(type = "data.frame",
                         columns = "ND",
                         aggregate = "daily")
 
-ts_plot(UKdaily)
+head(UKdaily)
+
+
+ts_plot(UKdaily,
+        title = "The UK National Demand for Electricity",
+        Ytitle = "MW",
+        Xtitle = "Year")
 # -------- Code Chank 26 --------
-ts_heatmap(UKdaily[which(year(UKdaily$TIMESTAMP) >= 2016),])
+ts_heatmap(UKdaily[which(year(UKdaily$TIMESTAMP) >= 2016),],
+           title = "UK the Daily National Grid Demand Heatmap")
 
 # -------- Code Chank 27 --------
 library(dplyr)
@@ -151,7 +168,10 @@ UKdaily <- UKdaily %>%
   mutate(wday = wday(TIMESTAMP, label = TRUE),
          month = month(TIMESTAMP, label = TRUE),
          lag365 = dplyr::lag(ND, 365)) %>%
-  dplyr::filter(!is.na(lag365))
+  filter(!is.na(lag365)) %>%
+  arrange(TIMESTAMP)
+str(UKdaily)
+
 # -------- Code Chank 28 --------
 start_date <- min(UKdaily$TIMESTAMP)
 
@@ -159,6 +179,8 @@ start_date <- min(UKdaily$TIMESTAMP)
 UK_ts <- ts(UKdaily$ND, 
             start = c(year(start_date), yday(start_date)),
             frequency = 365)
+ts_acf(UK_ts, lag.max = 365 * 4)
+
 # -------- Code Chank 29 --------
 h <-  365
 UKpartitions <- ts_split(UK_ts, sample.out = h)

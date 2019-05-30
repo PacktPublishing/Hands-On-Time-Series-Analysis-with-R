@@ -11,8 +11,10 @@ robusta <- Coffee_Prices[,1]
 # -------- Code Chank 3 --------
 library(plotly)
 
-ts_plot(robusta) %>% layout(title = "The Robusta Coffee Monthly Prices",
-                            yaxis = list(title = "USD per Kg."))
+ts_plot(robusta,
+        title = "The Robusta Coffee Monthly Prices",
+        Ytitle = "Price in USD",
+        Xtitle = "Year")
 # -------- Code Chank 4 --------
 library(tidyr)
 
@@ -99,8 +101,14 @@ data(USgas)
 
 USgas_df <- ts_to_prophet(USgas)
 # -------- Code Chank 8 --------
-USgas_fc_m12a <- sma_forecast(USgas_df, h = 24, m = 12, w = c(1, rep(0,11)))
-USgas_fc_m12b <- sma_forecast(USgas_df, h = 24, m = 12, w = c(0.8, rep(0,10), 0.2))
+USgas_fc_m12a <- sma_forecast(USgas_df,
+                              h = 24,
+                              m = 12,
+                              w = c(1, rep(0,11)))
+USgas_fc_m12b <- sma_forecast(USgas_df,
+                              h = 24,
+                              m = 12,
+                              w = c(0.8, rep(0,10), 0.2))
 # -------- Code Chank 9 --------
 plot_ly(data = USgas_df[190:nrow(USgas_df),], x = ~ ds, y = ~ y,
         type = "scatter", mode = "lines", 
@@ -143,15 +151,20 @@ fc_ses <- ses(train, h = 12, initial = "optimal")
 
 fc_ses$model
 # -------- Code Chank 12 --------
-test_forecast(actual = robusta, forecast.obj = fc_ses, test = test) %>%
+test_forecast(actual = robusta,
+              forecast.obj = fc_ses,
+              test = test) %>%
   layout(title = "Robusta Coffee Prices Forecast vs. Actual",
          xaxis = list(range = c(2010, max(time(robusta)))),
          yaxis = list(range = c(1, 3)))
 # -------- Code Chank 13 --------
 plot_forecast(fc_ses) %>%
-  add_lines(x = time(test), y = as.numeric(test), name = "Testing Partition") %>%
+  add_lines(x = time(test) + deltat(test),
+            y = as.numeric(test),
+            name = "Testing Partition") %>%
   layout(title = "Robusta Coffee Prices Forecast vs. Actual",
-         xaxis = list(range = c(2010, max(time(robusta)))),
+         xaxis = list(range = c(2010, max(time(robusta)) +
+                                  deltat(robusta))),
          yaxis = list(range = c(0, 4)))
 # -------- Code Chank 14 --------
 robusta_par1 <- ts_split(robusta, sample.out = 24)
