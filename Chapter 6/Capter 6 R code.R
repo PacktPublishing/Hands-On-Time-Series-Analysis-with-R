@@ -120,7 +120,7 @@ plot_ly(data = UKgrid_month, x = ~ month, y = ~ mean, type = "bar",color = ~ hou
          yaxis = list(title = "Mean", range = c(30000, 75000)), 
          xaxis = list(title = "Month"))
 # -------- Code Chank 14 --------
-# Plotting the density of each freqeuncy unit
+# Plotting the density of each frequency unit
 library(ggplot2)
 ggplot(USgas_df, aes(x = USgas)) + 
   geom_density(aes(fill = month)) + 
