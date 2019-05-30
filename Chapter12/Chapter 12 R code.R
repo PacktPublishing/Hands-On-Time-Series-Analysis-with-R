@@ -22,8 +22,9 @@ ts_acf(USVSales)
 # -------- Code Chank 7 --------
 ts_lags(USVSales, lags = c(12, 24, 36))
 # -------- Code Chank 8 --------
-df <- ts_to_prophet(window(USVSales, start = c(2010,1))) %>% 
-  setNames(c("date", "y"))
+df <- ts_to_prophet(window(USVSales, start = c(2010,1)))
+
+names(df) <-  c("date", "y")
 
 head(df)
 # -------- Code Chank 9 --------
