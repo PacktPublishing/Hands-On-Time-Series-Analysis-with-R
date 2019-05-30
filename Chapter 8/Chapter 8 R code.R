@@ -19,6 +19,8 @@ test <- window(USgas,
 ts_info(train)
 ts_info(test)
 # -------- Code Chank 2 --------
+# The sample.out argument set the size of the testing partition
+# (and therefore the training partition)
 USgas_partitions <- ts_split(USgas, sample.out = 12)
 
 train <- USgas_partitions$train
