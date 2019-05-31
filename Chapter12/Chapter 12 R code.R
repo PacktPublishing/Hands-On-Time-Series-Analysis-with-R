@@ -22,9 +22,8 @@ ts_acf(USVSales)
 # -------- Code Chank 7 --------
 ts_lags(USVSales, lags = c(12, 24, 36))
 # -------- Code Chank 8 --------
-df <- ts_to_prophet(window(USVSales, start = c(2010,1)))
-
-names(df) <-  c("date", "y")
+df <- ts_to_prophet(window(USVSales, start = c(2010,1))) %>% 
+  setNames(c("date", "y"))
 
 head(df)
 # -------- Code Chank 9 --------
@@ -55,7 +54,6 @@ forecast_df$trend_sqr <- forecast_df$trend ^ 2
 forecast_df$lag12 <- tail(df$y, 12)
 forecast_df$month <- factor(month(forecast_df$date, label = TRUE), ordered = FALSE)
 
-head(forecast_df)
 # -------- Code Chank 15 --------
 lr <- lm(y ~ month + lag12 + trend + trend_sqr, data = train_df)
 # -------- Code Chank 16 --------
@@ -68,12 +66,12 @@ mape_lr
 # -------- Code Chank 18 --------
 library(h2o)
 
-h2o.init(max_mem_size = "32G")
-h2o.removeAll()
+h2o.init(max_mem_size = "16G")
+
 # -------- Code Chank 19--------
 train_h <- as.h2o(train_df)
 test_h <- as.h2o(test_df)
-forecast_h <- as.h2o(forecast_df)
+
 # -------- Code Chank 20 --------
 x <- c("month", "lag12", "trend", "trend_sqr")
 y <- "y"
@@ -118,39 +116,33 @@ search_criteria_rf <- list(
   max_runtime_secs = 60 * 20
 )
 
-hyper_params_rf <-  list(
-  mtries = c(2, 3, 4),
-  sample_rate = c(0.632, 0.8, 0.95),
-  col_sample_rate_per_tree = c(0.5, 0.9, 1.0),
-  max_depth = c(seq(1, 30, 3)),
-  min_rows = c(1, 2, 5, 10)
-)
+hyper_params_rf <- list(mtries = c(2, 3, 4),
+                        sample_rate = c(0.632, 0.8, 0.95),
+                        col_sample_rate_per_tree = c(0.5, 0.9, 1.0),
+                        max_depth = c(seq(1, 30, 3)),
+                        min_rows = c(1, 2, 5, 10))
 
-rf2 <- h2o.grid("randomForest",
+rf2 <- h2o.grid(algorithm = "randomForest",
                 search_criteria = search_criteria_rf,
                 hyper_params = hyper_params_rf,
-                x = x, 
-                y = y, 
+                x = x,
+                y = y,
                 training_frame = train_h,
                 ntrees = 5000,
-                nfolds = 5, 
+                nfolds = 5,
                 grid_id = "rf_grid",
-                seed = 1234
-                
-)
+                seed = 1234)
+
 # -------- Code Chank 29 --------
 rf2_grid_search <- h2o.getGrid(grid_id = "rf_grid",
                                sort_by = "rmse",
                                decreasing = FALSE)
 
-rf2_grid_search 
-
 rf_grid_model <- h2o.getModel(rf2_grid_search@model_ids[[1]])
 
-summary(rf_grid_model)
-h2o.varimp_plot(rf_grid_model)
 
 test_h$rf_grid  <- h2o.predict(rf_grid_model, test_h)
+
 test_1 <- as.data.frame(test_h)
 
 mape_rf2 <- mean(abs(test_1$y - test_1$rf_grid) / test_1$y)
@@ -177,7 +169,7 @@ gbm_md <- h2o.gbm(
   score_each_iteration = TRUE
 )
 # -------- Code Chank 32 --------
-summary(gbm_md)
+
 h2o.varimp_plot(gbm_md)
 
 test_h$pred_gbm  <- h2o.predict(gbm_md, test_h)
@@ -186,9 +178,6 @@ test_1 <- as.data.frame(test_h)
 mape_gbm <- mean(abs(test_1$y - test_1$pred_gbm) / test_1$y)
 mape_gbm
 
-plot(test_1$trend, test_1$y, type = "l")
-lines(test_1$trend, test_1$pred_gbm, type = "l", col = "blue")
-lines(test_1$trend, test_1$pred_rf, type = "l", col = "red")
 # -------- Code Chank 33 --------
 plot_ly(data = test_1) %>%
   add_lines(x = ~ date, y = ~y, name = "Actual") %>%
@@ -205,7 +194,6 @@ autoML1 <- h2o.automl(training_frame = train_h,
                       max_runtime_secs = 60*20,
                       seed = 1234)
 # -------- Code Chank 35 --------
-summary(autoML1@leaderboard)
 autoML1@leaderboard
 
 test_h$pred_autoML  <- h2o.predict(autoML1@leader, test_h)
