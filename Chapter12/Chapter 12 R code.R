@@ -78,17 +78,16 @@ forecast_h <- as.h2o(forecast_df)
 x <- c("month", "lag12", "trend", "trend_sqr")
 y <- "y"
 # -------- Code Chank 21 --------
-rf_md <- h2o.randomForest(
-  training_frame = train_h,
-  nfolds = 5,
-  x = x,
-  y = y,
-  ntrees = 500,
-  stopping_rounds = 10,
-  stopping_metric = "RMSE",
-  score_each_iteration = TRUE,
-  stopping_tolerance = 0.0001,
-  seed = 1234)
+rf_md <- h2o.randomForest(training_frame = train_h,
+                          nfolds = 5,
+                          x = x,
+                          y = y,
+                          ntrees = 500,
+                          stopping_rounds = 10,
+                          stopping_metric = "RMSE",
+                          score_each_iteration = TRUE,
+                          stopping_tolerance = 0.0001,
+                          seed = 1234)
 # -------- Code Chank 22 --------
 h2o.varimp_plot(rf_md)
 # -------- Code Chank 23 --------
@@ -124,6 +123,12 @@ hyper_params_rf <- list(mtries = c(2, 3, 4),
                         max_depth = c(seq(1, 30, 3)),
                         min_rows = c(1, 2, 5, 10))
 
+search_criteria_rf <- list(strategy = "RandomDiscrete",
+                           stopping_metric = "rmse",
+                           stopping_tolerance = 0.0001,
+                           stopping_rounds = 10,
+                           max_runtime_secs = 60 * 20)
+
 rf2 <- h2o.grid(algorithm = "randomForest",
                 search_criteria = search_criteria_rf,
                 hyper_params = hyper_params_rf,
@@ -144,9 +149,6 @@ rf_grid_model <- h2o.getModel(rf2_grid_search@model_ids[[1]])
 
 
 test_h$rf_grid  <- h2o.predict(rf_grid_model, test_h)
-
-test_1 <- as.data.frame(test_h)
-
 mape_rf2 <- mean(abs(test_1$y - test_1$rf_grid) / test_1$y)
 mape_rf2
 # -------- Code Chank 30 --------
