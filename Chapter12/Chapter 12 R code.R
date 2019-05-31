@@ -72,6 +72,7 @@ h2o.init(max_mem_size = "16G")
 # -------- Code Chank 19--------
 train_h <- as.h2o(train_df)
 test_h <- as.h2o(test_df)
+forecast_h <- as.h2o(forecast_df)
 
 # -------- Code Chank 20 --------
 x <- c("month", "lag12", "trend", "trend_sqr")
