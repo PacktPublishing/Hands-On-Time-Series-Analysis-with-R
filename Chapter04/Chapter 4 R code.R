@@ -201,7 +201,7 @@ plot.xts(Michigan_CS)
 # -------- Code Chank 48 --------
 plot.xts(Michigan_CS,
          subset = "2010/",
-         main = "Univeristy of Michigan Consumer Sentiment Index",
+         main = "University of Michigan Consumer Sentiment Index",
          col = "blue",
          grid.ticks.on = "years",
          minor.ticks = "years")
