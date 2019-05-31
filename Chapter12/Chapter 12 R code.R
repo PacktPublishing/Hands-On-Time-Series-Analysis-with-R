@@ -36,7 +36,7 @@ ts_plot(df,
 library(dplyr)
 library(lubridate)
 
-df <- df %>% mutate(month = factor(month(date, label = TRUE), ordered = FALSE),
+df <- df %>% mutate(month = factor(lubridate::month(date, label = TRUE), ordered = FALSE),
                     lag12 = lag(y, n = 12)) %>%
   filter(!is.na(lag12))
 # -------- Code Chank 11 --------
@@ -49,11 +49,13 @@ h <- 12
 train_df <- df[1:(nrow(df) - h), ]
 test_df <- df[(nrow(df) - h + 1):nrow(df), ]
 # -------- Code Chank 14 --------
-forecast_df <- data.frame(date = seq.Date(from = max(df$date) + month(1), length.out = h, by = "month"),
+forecast_df <- data.frame(date = seq.Date(from = max(df$date) + lubridate::month(1),
+                                          length.out = h, by = "month"),
                           trend = seq(from = max(df$trend) + 1, length.out = h, by = 1))
 forecast_df$trend_sqr <- forecast_df$trend ^ 2
+forecast_df$month <- factor(lubridate::month(forecast_df$date, label = TRUE), ordered= FALSE)
 forecast_df$lag12 <- tail(df$y, 12)
-forecast_df$month <- factor(month(forecast_df$date, label = TRUE), ordered = FALSE)
+
 
 head(forecast_df)
 # -------- Code Chank 15 --------
