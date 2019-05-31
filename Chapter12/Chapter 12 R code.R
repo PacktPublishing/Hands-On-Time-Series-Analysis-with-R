@@ -52,8 +52,8 @@ test_df <- df[(nrow(df) - h + 1):nrow(df), ]
 forecast_df <- data.frame(date = seq.Date(from = max(df$date) + month(1), length.out = h, by = "month"),
                           trend = seq(from = max(df$trend) + 1, length.out = h, by = 1))
 forecast_df$trend_sqr <- forecast_df$trend ^ 2
-forecast_df$lag12 <- tail(df$y, 12)
 forecast_df$month <- factor(month(forecast_df$date, label = TRUE), ordered = FALSE)
+forecast_df$lag12 <- tail(df$y, 12)
 
 # -------- Code Chank 15 --------
 lr <- lm(y ~ month + lag12 + trend + trend_sqr, data = train_df)
