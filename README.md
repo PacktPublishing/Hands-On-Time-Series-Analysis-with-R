@@ -6,7 +6,7 @@ This is the code repository for [Hands-On Time Series Analysis with R](https://w
 **Perform time series analysis and forecasting using R**
 
 ## What is this book about?
-Scala is a highly scalable integration of object-oriented nature and functional programming concepts that make it easy to build scalable and complex big data applications. This book is a handy guide for machine learning developers and data scientists who want to develop and train effective machine learning models in Scala.
+Time series analysis is one of the key fields in statistical programming and it comprises of various techniques to analyze data to extract meaningful insights and other valuable characteristics from data. This book will be introducing readers to some powerful methods such as prediction and forecasting with Time Series Analysis using R. The book will equip you with tools and techniques which will let you confidently think through the problem.
 
 This book covers the following exciting features:
 * Get acquainted with JVM-based machine learning libraries for Scala such as Spark ML and Deeplearning4j
