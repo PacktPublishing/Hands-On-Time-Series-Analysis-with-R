@@ -33,6 +33,7 @@ data(USgas)
 ```
 
 **Following is what you need for this book:**
+
 This book was written under the assumption that its readers have the following knowledge
 and skills:
 * Basic knowledge of statistics or econometrics, which includes topics such as regression modeling, hypothesis testing, normal distribution, and so on
