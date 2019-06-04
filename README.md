@@ -48,7 +48,7 @@ With the following software and hardware list you can run all code files present
 | 1-12    | R (≥ 3.0.2), Recommended R(≥ 3.4.0)| Windows, Mac OS X, and Linux (Any) |
 
 ### Related products
-* R Machine Learning Projects [[Packt]](https://prod.packtpub.com/in/big-data-and-business-intelligence/scala-machine-learning-projects?utm_source=github&utm_medium=repository&utm_campaign=9781788479042) [[Amazon]](https://www.amazon.com//dp/B07KJDL5Y9)
+* R Machine Learning Projects [[Packt]](https://www2.packtpub.com/big-data-and-business-intelligence/r-machine-learning-projects?utm_source=github&utm_medium=repository&utm_campaign=9781789807943) [[Amazon]](https://www.amazon.com/dp/B07KJDL5Y9)
 
 * Machine Learning with R - Third Edition [[Packt]](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-r-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781788295864) [[Amazon]](https://www.amazon.com/dp/1788295862)
 
