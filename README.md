@@ -9,13 +9,15 @@ This is the code repository for [Hands-On Time Series Analysis with R](https://w
 Time series analysis is one of the key fields in statistical programming and it comprises of various techniques to analyze data to extract meaningful insights and other valuable characteristics from data. This book will be introducing readers to some powerful methods such as prediction and forecasting with Time Series Analysis using R. The book will equip you with tools and techniques which will let you confidently think through the problem.
 
 This book covers the following exciting features:
-* Get acquainted with JVM-based machine learning libraries for Scala such as Spark ML and Deeplearning4j
-* Learn RDDs, DataFrame, and Spark SQL for analyzing structured and unstructured data
-* Understand supervised and unsupervised learning techniques with best practices and pitfalls
-* Learn classification and regression analysis with linear regression, logistic regression, Naïve Bayes, support vector machine, and tree-based ensemble techniques
-* Learn effective ways of clustering analysis with dimensionality reduction techniques
+* The practical & easy to follow codes to evaluate the high-performance forecasting solution.
+* Develop a basic understanding of visualizing time series data in order to derive better insights.
+* Explore auto-correlation and gain knowledge of statistical techniques to deal with non-stationary time series.
+* Learn to build a Bayesian Structural Time Series model with external variables.
+* Discover how to use time series analysis tools from the stats, forecast and astsa packages.
+* Understand how to work with different time series formats in R (“ts”, “mts”, “xts” and “zoo” objects)
+* Get introduced to traditional time series models like; ARIMA, Holt-Winters, ETS, etc.
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789345073) today!
+If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1788629159) today!
 
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
@@ -26,29 +28,23 @@ All of the code is organized into folders. For example, Chapter02.
 
 The code will look like the following:
 ```
-rawTrafficDF.select("Hour (Coded)", "Immobilized bus", "Broken Truck", 
-                    "Vehicle excess", "Fire", "Slowness in traffic (%)").show(5)
+library(TSstudio)
+data(USgas)
 ```
 
 **Following is what you need for this book:**
-This book is for machine learning developers looking to train machine learning models in Scala without spending too much time and effort. Some fundamental knowledge of Scala programming and some basics of statistics and linear algebra is all you need to get started with this book.	
+This book was written under the assumption that its readers have the following knowledge
+and skills:
+* Basic knowledge of statistics or econometrics, which includes topics such as regression modeling, hypothesis testing, normal distribution, and so on
+* Experience with R, or another programming language
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-7).
+With the following software and hardware list you can run all code files present in the book (Chapter 1-11).
 
 ### Software and Hardware List
 
 | Chapter  | Software required                   | OS required                        |
 | -------- | ------------------------------------| -----------------------------------|
-| 1-3,6    | Spark: 2.3.0 (or higher), Hadoop: 2.7 (or higher), Java (JDK and JRE): 1.8+, Scala: 2.11.x (or higher), Eclipse Mars/Luna: latest, Maven Eclipse plugin: 2.9 or higher, Maven compiler plugin for Eclipse: 2.3.2 or higher, Maven assembly plugin for Eclipse: 2.4.1 or higher, Importantly, re-use the provided pom.xml file with Packt supplementary and change the version mentioned above and APIs. Then everything will be managed accordingly.| Windows, Mac OS X, and Linux (Any) |
-| 5        | Same as above plus the following: h2o version: 3.22.1.1, sparkling water version: 2.4.1, adam version: 0.23.0            | Windows, Mac OS X, and Linux (Any) |
-| 7        | Same as above PLUS the following: Spark csv_2.11 version: 1.3.0, ND4j backend version: - If GPU configured: nd4j-cuda-9.0-platform - Otherwise: nd4j-native, ND4j version: 1.0.0-alpha, DL4j version: 1.0.0-alpha, Datavec version: 1.0.0-alpha, Arbiter version: 1.0.0-alpha, Logback version: 1.2.3.            | Windows, Mac OS X, and Linux (Any) |
-
-
-## Code in Action
-
-Click on the following link to see the Code in Action:
-
-[http://bit.ly/2WhQf2i](http://bit.ly/2WhQf2i)
+| 1-11    | R (≥ 3.0.2), Recommended R(≥ 3.4.0)| Windows, Mac OS X, and Linux (Any) |
 
 ### Related products
 * Scala Machine Learning Projects [[Packt]](https://prod.packtpub.com/in/big-data-and-business-intelligence/scala-machine-learning-projects?utm_source=github&utm_medium=repository&utm_campaign=9781788479042) [[Amazon]](https://www.amazon.com/dp/1788479041)
