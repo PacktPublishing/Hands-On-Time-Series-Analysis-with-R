@@ -6,16 +6,16 @@ This is the code repository for [Hands-On Time Series Analysis with R](https://w
 **Perform time series analysis and forecasting using R**
 
 ## What is this book about?
-Time series analysis is one of the key fields in statistical programming and it comprises of various techniques to analyze data to extract meaningful insights and other valuable characteristics from data. This book will be introducing readers to some powerful methods such as prediction and forecasting with Time Series Analysis using R. The book will equip you with tools and techniques which will let you confidently think through the problem.
+Time series analysis is the art of extracting meaningful insights from, and revealing patterns in, time series data using statistical and data visualization approaches. These insights and patterns can then be utilized to explore past events and forecast future values in the series.
 
 This book covers the following exciting features:
-* The practical & easy to follow codes to evaluate the high-performance forecasting solution.
-* Develop a basic understanding of visualizing time series data in order to derive better insights.
-* Explore auto-correlation and gain knowledge of statistical techniques to deal with non-stationary time series.
-* Learn to build a Bayesian Structural Time Series model with external variables.
-* Discover how to use time series analysis tools from the stats, forecast and astsa packages.
-* Understand how to work with different time series formats in R (“ts”, “mts”, “xts” and “zoo” objects)
-* Get introduced to traditional time series models like; ARIMA, Holt-Winters, ETS, etc.
+* Visualize time series data and derive better insights
+* Explore auto-correlation and master statistical techniques
+* Use time series analysis tools from the stats, TSstudio, and forecast packages
+* Explore and identify seasonal and correlation patterns
+* Work with different time series formats in R
+* Explore time series models such as ARIMA, Holt-Winters, and more
+* Evaluate high-performance forecasting solutions
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1788629159) today!
 
