@@ -1,7 +1,7 @@
 # Hands-On Time Series Analysis with R
-<a href="https://www.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r?utm_source=github&utm_medium=repository&utm_campaign=9781788629157"><img src="https://packt-type-cloud.s3.amazonaws.com/uploads/sites/2205/2019/05/cover.png" height="256px" align="right"></a>
+<a href="https://www2.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r?utm_source=github&utm_medium=repository&utm_campaign=9781788629157"><img src="https://packt-type-cloud.s3.amazonaws.com/uploads/sites/2205/2019/05/cover.png" height="256px" align="right"></a>
 
-This is the code repository for [Hands-On Time Series Analysis with R](https://www.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r?utm_source=github&utm_medium=repository&utm_campaign=9781788629157), published by Packt.
+This is the code repository for [Hands-On Time Series Analysis with R](https://www2.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r?utm_source=github&utm_medium=repository&utm_campaign=9781788629157), published by Packt.
 
 **Perform time series analysis and forecasting using R**
 
