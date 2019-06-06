@@ -46,6 +46,7 @@ With the following software and hardware list you can run all code files present
 | Chapter  | Software required                   | OS required                        |
 | -------- | ------------------------------------| -----------------------------------|
 | 1-12    | R (≥ 3.0.2), Recommended R(≥ 3.4.0)| Windows, Mac OS X, and Linux (Any) |
+
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781788629157_ColorImages.pdf).
 ### Related products
 * R Machine Learning Projects [[Packt]](https://www2.packtpub.com/big-data-and-business-intelligence/r-machine-learning-projects?utm_source=github&utm_medium=repository&utm_campaign=9781789807943) [[Amazon]](https://www.amazon.com/dp/B07KJDL5Y9)
