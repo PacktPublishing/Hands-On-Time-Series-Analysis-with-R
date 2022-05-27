@@ -1,3 +1,7 @@
+## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B08991?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
+-----
+For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
+
 # Hands-On Time Series Analysis with R
 <a href="https://www2.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r?utm_source=github&utm_medium=repository&utm_campaign=9781788629157"><img src="https://packt-type-cloud.s3.amazonaws.com/uploads/sites/2205/2019/05/cover.png" height="256px" align="right"></a>
 
